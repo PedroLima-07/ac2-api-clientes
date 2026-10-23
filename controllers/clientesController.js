@@ -1,6 +1,5 @@
 const { randomUUID } = require('crypto');
 
-// Dados armazenados em memória (enquanto a aplicação estiver em execução)
 const clientes = [
     {
         id: 1,
@@ -39,12 +38,10 @@ const clientes = [
     }
 ];
 
-// Lógica para listar todos os clientes
 exports.getAll = (request, response) => {
     return response.json(clientes);
 };
 
-// Lógica para buscar um cliente pelo id
 exports.getById = (request, response) => {
     const { id } = request.params;
     const cliente = clientes.find((c) => c.id === Number(id));
@@ -54,7 +51,6 @@ exports.getById = (request, response) => {
     return response.json(cliente);
 };
 
-// Lógica para listar os pedidos de um cliente
 exports.getPedidos = (request, response) => {
     const { id } = request.params;
     const cliente = clientes.find((c) => c.id === Number(id));
@@ -64,7 +60,6 @@ exports.getPedidos = (request, response) => {
     return response.json(cliente.pedidos);
 };
 
-// Lógica para atualizar os dados de um cliente
 exports.update = (request, response) => {
     const { id } = request.params;
     const { nome, idade, cidade } = request.body;
@@ -81,7 +76,6 @@ exports.update = (request, response) => {
     return response.json(clientes[index]);
 };
 
-// Lógica para adicionar um pedido a um cliente
 exports.addPedido = (request, response) => {
     const { id } = request.params;
     const { produto, quantidade } = request.body;
@@ -98,7 +92,6 @@ exports.addPedido = (request, response) => {
     return response.status(201).json(cliente);
 };
 
-// Lógica para listar os clientes de uma cidade
 exports.getByCidade = (request, response) => {
     const { cidade } = request.params;
     const resultado = clientes.filter(
@@ -107,7 +100,6 @@ exports.getByCidade = (request, response) => {
     return response.json(resultado);
 };
 
-// Lógica para remover um cliente
 exports.remove = (request, response) => {
     const { id } = request.params;
     const index = clientes.findIndex((c) => c.id === Number(id));
